@@ -70,7 +70,7 @@ The additional information that RGB values provide is not necessary when detecti
 
 As we will be finding contours, we also need a low-pass filter, or image blur, prior to the processing steps due to the possibility of image noise creating flawed edge detection. This is because the contour calculation checks for high gradient pixel values at different locations, and smaller aspects of a visual image (such as freckles on a face) could be recognized as an independent image.
 
-![1550162096221](C:\Users\micha\AppData\Roaming\Typora\typora-user-images\1550162096221.png)
+![1550162096221](img\movement.png)
 
 In this program, `imshow()` is used to show singular frames such as the now blurred and grayscaled image above
 
@@ -112,7 +112,7 @@ cv2.destroyAllWindows
 
 The motion detection really occurs in two steps that are repeated in sequence. As a video is a chain of image stills, the core process in detection is the storage of a single frame and a comparison to an adjacent frame.  
 
-![movement](img\movement.png)
+![movement](img/movement.png)
 
 > The first frame has defined pixel values which are stored, and any significant change amongst these pixel values are recognized and detected
 
@@ -122,17 +122,17 @@ The processing occurs in *five* core steps.
 
 1. Creation of the delta frame, which is composed of the difference of pixel values between the current frame and the adjacent frame. 
 
-   ![1550162072426](img\1.png)
+   ![1550162072426](img/1.png)
 
 2. Creation of a threshold frame from the delta frame which establishes a consistent boundary between the 'movement' pixels of the delta frame.
 
-   ![1550162284089](img\2.png)
+   ![1550162284089](img/2.png)
 
 3. Establishment of contours searching on the simplistic threshold frame, and an area check within the contour boundaries to determine 'object' classification.
 
 4. Output of a label at each timestep plotting the placement of relevant moving 'objects' established from the previous contour area check that was created from the initial and adjacent frame difference.
 
-   ![1550163902835](img\3.png)
+   ![1550163902835](img/3.png)
 
    There are some intermediate steps that are used to reduce noise such as the dilation of the threshold frame, but these are not relevant to the core aspects of the process. 
 
